@@ -3,6 +3,7 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 from django.db import models
+from simple_history.models import HistoricalRecords
 
 __all__ = ['TestCase', 'HilModel']
 
@@ -10,6 +11,7 @@ __all__ = ['TestCase', 'HilModel']
 class TestCase(models.Model):
     objects = models.Manager()
     name = models.TextField()
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.name

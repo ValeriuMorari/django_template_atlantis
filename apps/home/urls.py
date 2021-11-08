@@ -11,6 +11,7 @@ urlpatterns = [
     # The home page
     path('', views.index, name='home'),
     path('add_hil', views.HilManager.as_view(), name='add_hil'),
+    path('add_test_case', views.TestCaseManager.as_view(), name='add_test_case'),
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
 

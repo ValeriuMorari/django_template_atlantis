@@ -27,7 +27,7 @@
 						<i class="flaticon-right-arrow"></i>
 					</li>
 					<li class="nav-item">
-						<a href="#">Basic Form</a>
+						<a href="#">{{ form_title }}</a>
 					</li>
 				</ul>
 			</div>
@@ -37,20 +37,21 @@
 						<form class="form" method="post" id="generic_form_id">
 							{% csrf_token %}
 							<div class="card-header">
-								<div class="card-title">Form Elements</div>
+								<div class="card-title">{{ form_title }}</div>
 							</div>
 							<div class="card-body">
 								<div class="row">
 									<div class="col-md-6 col-lg-4">
 										<div class="form-group">
-											{{ hil_form.as_p }}
+											{{ form.as_p }}
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="card-action">
 								<button type="submit" class="btn btn-success" id="submit">Submit</button>
-								<button class="btn btn-danger" id="cancel">Cancel</button>
+								<a class="btn btn-danger" href="{% url 'pages' %}">Cancel</a>
+<!--								<button class="btn btn-danger" id="cancel">Cancel</button>-->
 							</div>
 						</form>
 					</div>

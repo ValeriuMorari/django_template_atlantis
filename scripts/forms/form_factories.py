@@ -9,6 +9,9 @@ class AtlantisModelForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
+    def __str__(self):
+        return self.__class__.__name__
+
 
 def model_form_creator(model_, theme: str) -> forms.ModelForm:
     """

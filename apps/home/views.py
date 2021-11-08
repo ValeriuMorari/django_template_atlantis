@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render
-from .forms import HilForm
+from .forms import HilForm, TestCaseForm
 from django.views import View
 
 @login_required(login_url="/login/")
@@ -46,19 +46,46 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 
-class HilManager(View):
+class TestCaseManager(View):
 
     @staticmethod
     def get(request):
-        hil_form = HilForm()
+        form = TestCaseForm()
         return render(request, 'home/p_forms.html', {
-            'hil_form': hil_form
+            'form': form,
+            'form_title': str(TestCaseForm()),
         })
 
     @staticmethod
     def post(request):
-        hil_form = HilForm(request.POST)
+        form = TestCaseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            note = 'success'
+        else:
+            note = 'Form is not valid'
         return render(request, 'home/p_forms.html', {
-            'hil_form': hil_form,
+            'form': form,
+            'form_title': str(TestCaseForm()),
+            'note': note
+        })
+
+
+class HilManager(View):
+
+    @staticmethod
+    def get(request):
+        form = HilForm()
+        return render(request, 'home/p_forms.html', {
+            'form': form,
+            'form_title': str(HilForm())
+        })
+
+    @staticmethod
+    def post(request):
+        form = HilForm(request.POST)
+        return render(request, 'home/p_forms.html', {
+            'form': form,
+            'form_title': str(HilForm()),
             'note': 'error: you are too expert for us'
         })
