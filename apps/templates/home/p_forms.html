@@ -1,0 +1,93 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Forms</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Forms</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Basic Form</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<form class="form" method="post" id="generic_form_id">
+							{% csrf_token %}
+							<div class="card-header">
+								<div class="card-title">Form Elements</div>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6 col-lg-4">
+										<div class="form-group">
+											{{ hil_form.as_p }}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-action">
+								<button type="submit" class="btn btn-success" id="submit">Submit</button>
+								<button class="btn btn-danger" id="cancel">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+<script>
+	var note = "{{ note }}";
+	if (note == "success")
+	{
+		swal("Good job!", "Form was submitted!", {
+						icon : "success",
+						buttons: {
+							confirm: {
+								className : 'btn btn-success'
+							}
+						},
+					});
+	}else if (note != "")
+	{
+		swal(note, {
+						icon : "error",
+						buttons: {
+							confirm: {
+								className : 'btn btn-danger'
+							}
+						},
+					});
+	}
+
+</script>
+
+{% endblock javascripts %}

@@ -10,7 +10,7 @@ from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render
 from .forms import HilForm
-
+from django.views import View
 
 @login_required(login_url="/login/")
 def index(request):
@@ -46,8 +46,19 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 
-def add_hil(request):
-    hil_form = HilForm()
-    return render(request, 'home/p_forms.html', {
-        'hil_form': hil_form
-    })
+class HilManager(View):
+
+    @staticmethod
+    def get(request):
+        hil_form = HilForm()
+        return render(request, 'home/p_forms.html', {
+            'hil_form': hil_form
+        })
+
+    @staticmethod
+    def post(request):
+        hil_form = HilForm(request.POST)
+        return render(request, 'home/p_forms.html', {
+            'hil_form': hil_form,
+            'note': 'error: you are too expert for us'
+        })
