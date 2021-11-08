@@ -4,6 +4,8 @@ Copyright (c) 2019 - present AppSeed.us
 """
 from django.db import models
 
+__all__ = ['TestCase', 'HilModel']
+
 
 class TestCase(models.Model):
     objects = models.Manager()
@@ -11,6 +13,9 @@ class TestCase(models.Model):
 
     def __str__(self):
         return self.name
+
+    def __repr__(self):
+        return __class__.__name__
 
 
 class HilModel(models.Model):
@@ -31,3 +36,6 @@ class HilModel(models.Model):
 
     def __str__(self):
         return self.hil_host
+
+    def __repr__(self):
+        return __class__.__name__
