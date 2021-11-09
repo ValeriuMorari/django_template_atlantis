@@ -12,6 +12,7 @@ from django.shortcuts import render
 from .forms import HilForm, TestCaseForm
 from django.views import View
 
+
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
@@ -84,8 +85,13 @@ class HilManager(View):
     @staticmethod
     def post(request):
         form = HilForm(request.POST)
+        if form.is_valid():
+            form.save()
+            note = 'success'
+        else:
+            note = 'Form is not valid'
         return render(request, 'home/p_forms.html', {
             'form': form,
             'form_title': str(HilForm()),
-            'note': 'error: you are too expert for us'
+            'note': note
         })

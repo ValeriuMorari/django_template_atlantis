@@ -1,14 +1,12 @@
 from django.contrib import admin
 from .models import HilModel, TestCase
-from simple_history import register
-from django.contrib.auth.models import User
+from simple_history.admin import SimpleHistoryAdmin
 
 
 @admin.register(HilModel)
-class HilModelAdmin(admin.ModelAdmin):
+class HilModelAdmin(SimpleHistoryAdmin):
     list_display = ['hil_host', 'type', 'had_architecture']
 
 
-register(User)
 # admin.site.register(HilModel)
-admin.site.register(TestCase)
+admin.site.register(TestCase, SimpleHistoryAdmin)

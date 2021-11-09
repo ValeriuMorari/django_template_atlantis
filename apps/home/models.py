@@ -35,6 +35,7 @@ class HilModel(models.Model):
     validation_spec = models.TextField()
     test_cases = models.ManyToManyField(TestCase, related_name='test_cases')
     variant_coding_test_cases = models.ManyToManyField(TestCase, related_name='variant_test_cases')
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.hil_host
