@@ -124,5 +124,11 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 SIMPLE_HISTORY_REVERT_DISABLED = False
+
+AUTHENTICATION_BACKENDS = (
+    'apps.authentication.accounts.backends.AuthBackend',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
 #############################################################
 #############################################################

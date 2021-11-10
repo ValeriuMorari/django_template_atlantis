@@ -85,9 +85,10 @@ class HilManager(View):
     @staticmethod
     def post(request):
         form = HilForm(request.POST)
+        note = str()
         if form.is_valid():
             form.save()
-            note = 'success'
+            note = 'Form is not valid; you are too good'
         else:
             note = 'Form is not valid'
         return render(request, 'home/p_forms.html', {
