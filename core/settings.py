@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.home',  # Enable the inner home (home)
     'simple_history',
+    'django_tables2',
+    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [

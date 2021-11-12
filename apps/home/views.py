@@ -9,8 +9,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.shortcuts import render
-from .forms import HilForm, TestCaseForm
+from .forms import HilForm, TestCaseForm, HILsModalForm
+from .models import HilModel
+from .tables import HILsTable
 from django.views import View
+from django_tables2 import SingleTableView
+from django.shortcuts import redirect
+from bootstrap_modal_forms.generic import BSModalCreateView
+from django.urls import reverse_lazy
 
 
 @login_required(login_url="/login/")
@@ -45,6 +51,13 @@ def pages(request):
     except:
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
+
+
+class HilsView(SingleTableView):
+    SingleTableView.table_pagination = False
+    model = HilModel
+    table_class = HILsTable
+    template_name = 'home/hils.html'
 
 
 class TestCaseManager(View):
@@ -96,3 +109,15 @@ class HilManager(View):
             'form_title': str(HilForm()),
             'note': note
         })
+
+
+class HilManagerModal(BSModalCreateView):
+    template_name = 'layouts/modal_create.html'
+    form_class = HILsModalForm
+    success_message = 'Success: Book was created.'
+    success_url = reverse_lazy('hils')
+
+
+def delete(request, hil_id):
+    HilModel.objects.filter(id=hil_id).delete()
+    return redirect('hils')
