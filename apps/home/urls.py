@@ -10,7 +10,9 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
-    path('add_hil', views.HilManager.as_view(), name='add_hil'),
+    path('add_hil', views.HilManager.as_view(extra_context={
+        'title': 'Add HIL:'}), name='add_hil'),
+
     path('add_test_case', views.TestCaseManager.as_view(), name='add_test_case'),
     path('hils/', views.HilsView.as_view(extra_context={
         'title': 'HILs',

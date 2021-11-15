@@ -17,7 +17,7 @@ from django_tables2 import SingleTableView
 from django.shortcuts import redirect
 from bootstrap_modal_forms.generic import BSModalCreateView
 from django.urls import reverse_lazy
-
+from django.views.generic.base import ContextMixin
 
 @login_required(login_url="/login/")
 def index(request):
@@ -85,7 +85,7 @@ class TestCaseManager(View):
         })
 
 
-class HilManager(View):
+class HilManager(ContextMixin, View):
 
     @staticmethod
     def get(request):
